@@ -41,8 +41,8 @@ jobs:
       - name: Main
         run: |
           pwd
-          chmod +x beinsports-haber.sh
-          ./beinsports-haber.sh
+          chmod +x 24News.sh
+          ./24News.sh
         
       - name: git add
         run: |

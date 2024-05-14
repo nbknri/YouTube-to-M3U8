@@ -59,3 +59,7 @@ if not line.startswith('https:'):
         else:
         # Generate the m3u8 file for the current channel
         grab(line)
+
+if 'temp.txt' in os.listdir():
+    os.system('rm temp.txt')
+    os.system('rm watch*')

@@ -2,10 +2,12 @@ import requests
 import os
 import sys
 
+# Check if running on Windows
 windows = False
 if 'win' in sys.platform:
     windows = True
 
+# Function to grab M3U8 file from YouTube channel URL
 def grab(url, channel_name):
     response = s.get(url, timeout=15).text
     if '.m3u8' not in response:
@@ -38,14 +40,17 @@ def grab(url, channel_name):
         f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
         f.write(hd[st:].strip())
 
+# Create a session
 s = requests.Session()
-with open('/home/runner/work/YouTube-to-M3U8/YouTube-to-M3U8/channel-name.txt') as f:
+
+# Open channel-name.txt and parse each line
+with open('channel-name.txt') as f:
     lines = f.readlines()
-    for line in lines[2:]:
+    for line in lines[1:]:
         if line.strip() and not line.startswith('~~'):
             parts = line.strip().split('|')
             if len(parts) >= 2:
                 channel_name = parts[0].strip()
-                url = parts[1].strip()
+                url = parts[-1].strip()
                 if url.startswith('https:'):
                     grab(url, channel_name)

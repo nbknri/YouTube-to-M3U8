@@ -50,10 +50,10 @@ with open('../channel-name.txt') as f:
         # Split the line into channel name, group name, logo, and tvg-id
         line_parts = line.split('|')
         ch_name = line_parts[0].strip()
-        # Adjust other parts as needed...
-        else:
-            # Generate the m3u8 file for the current channel
-            grab(line)
+        
+    else:
+        # Generate the m3u8 file for the current channel
+        grab(line)
 
 if 'temp.txt' in os.listdir():
     os.system('rm temp.txt')

@@ -40,6 +40,7 @@ print('#EXTM3U')
 print('#EXT-X-VERSION:3')
 print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
 s = requests.Session()
+
 # Iterate through each line in the channel-name.txt file
 with open('../channel-name.txt') as f:
     for line in f:
@@ -50,15 +51,9 @@ with open('../channel-name.txt') as f:
         line_parts = line.split('|')
         ch_name = line_parts[0].strip()
         # Adjust other parts as needed...
-if not line.startswith('https:'):
-            line = line.split('|')
-            ch_name = line[0].strip()
-            grp_title = line[1].strip().title()
-            tvg_logo = line[2].strip()
-            tvg_id = line[3].strip()
         else:
-        # Generate the m3u8 file for the current channel
-        grab(line)
+            # Generate the m3u8 file for the current channel
+            grab(line)
 
 if 'temp.txt' in os.listdir():
     os.system('rm temp.txt')

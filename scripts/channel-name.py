@@ -47,8 +47,8 @@ with open('../channel-name.txt') as f:
     for line in lines[2:]:
         if line.strip() and not line.startswith('~~'):
             parts = line.strip().split('|')
-            if len(parts) >= 4:
+            if len(parts) >= 2:  # Ensure there are at least two parts
                 channel_name = parts[0].strip()
-                url = parts[4].strip()
+                url = parts[1].strip()  # Use the second part for URL
                 if url.startswith('https:'):
                     grab(url, channel_name)

@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+
 import requests
 import os
 import sys
@@ -6,7 +8,7 @@ windows = False
 if 'win' in sys.platform:
     windows = True
 
-def grab(url, output_dir, file_name):
+def grab(url, channel_name):
     response = s.get(url, timeout=15).text
     if '.m3u8' not in response:
         response = requests.get(url).text
@@ -33,36 +35,19 @@ def grab(url, output_dir, file_name):
     streams = s.get(link[start:end]).text.split('#EXT')
     hd = streams[-1].strip()
     st = hd.find('http')
-    
-    # Construct the full path for the output file
-    output_file_path = os.path.join(output_dir, file_name)
-    
-    with open(output_file_path, 'w') as f:
+    with open(f'../{channel_name}.m3u8', 'w') as f:
         f.write('#EXTM3U\n')
         f.write('#EXT-X-VERSION:3\n')
         f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
         f.write(hd[st:].strip())
 
 s = requests.Session()
-
-def get_channel_names(file_path):
-    channel_names = []
-    with open(file_path) as f:
-        for line in f:
-            parts = line.split('|')
-            channel_name = parts[0].strip()
-            channel_names.append(channel_name)
-    return channel_names
-
-channel_names = get_channel_names('channel-name.txt')
-
-with open('channel-name.txt') as f:
+with open('../channel-name.txt') as f:
     for i, line in enumerate(f):
         line = line.strip()
         if not line or line.startswith('~~'):
             continue
+        parts = line.split('|')
+        channel_name = parts[0].strip().replace(' ', '')  # Remove spaces from channel name
         if line.startswith('https:'):
-            url = line
-            output_dir = 'output_directory'  # Change this to your desired output directory
-            file_name = f'{channel_names[i]}_{i+1}.m3u8'
-            grab(url, output_dir, file_name)
+            grab(line, channel_name)

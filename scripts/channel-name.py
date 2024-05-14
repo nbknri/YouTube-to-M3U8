@@ -42,8 +42,8 @@ def grab(url, output_file):
 s = requests.Session()
 
 # Create the "channel" folder if it doesn't exist
-if not os.path.exists('channel'):
-    os.makedirs('channel')
+if not os.path.exists('../channel'):
+    os.makedirs('../channel')
 
 with open('../channel-name.txt') as f:
     lines = f.readlines()
@@ -52,6 +52,6 @@ with open('../channel-name.txt') as f:
         if '|' in line:
             channel_info = line.split(' | ')
             name = channel_info[0]
-            output_file = f'channel/{name.replace(" ", "")}.m3u8'
+            output_file = f'../channel/{name.replace(" ", "")}.m3u8'
             url = lines[i+1].strip()  # Get the URL from the next line
             grab(url, output_file)

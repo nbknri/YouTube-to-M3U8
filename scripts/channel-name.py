@@ -50,6 +50,12 @@ with open('../channel-name.txt') as f:
         line_parts = line.split('|')
         ch_name = line_parts[0].strip()
         # Adjust other parts as needed...
-
+if not line.startswith('https:'):
+            line = line.split('|')
+            ch_name = line[0].strip()
+            grp_title = line[1].strip().title()
+            tvg_logo = line[2].strip()
+            tvg_id = line[3].strip()
+        else:
         # Generate the m3u8 file for the current channel
         grab(line)

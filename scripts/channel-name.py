@@ -43,11 +43,10 @@ def grab(url, output_file):
 
 s = requests.Session()
 with open('../channel-name.txt') as f:
-    lines = f.readlines()
-    for line in lines:
-        parts = line.strip().split('|')
-        if len(parts) >= 2:
-            channel_name = parts[0].strip().replace(' ', '')  # Extract and clean channel name
-            url = parts[-1].strip()
-            if url.startswith('https:'):
-                grab(url, f'../{channel_name}.m3u8')  # Use channel name for the output file
+    for i, line in enumerate(f):
+        line = line.strip()
+        if not line or line.startswith('~~'):
+            continue
+        if line.startswith('https:'):
+            url, custom_filename = line.split('|')[0].strip(), line.split('|')[1].strip()
+            grab(url, f'../{custom_filename}.m3u8')

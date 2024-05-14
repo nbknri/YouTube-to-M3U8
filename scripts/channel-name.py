@@ -46,6 +46,6 @@ with open('../channel-name.txt') as f:
         if not line or line.startswith('~~'):
             continue
         if line.startswith('https:'):
-            channel_name = line.split('/')[-1].split('.')[0]  # Extract channel name from URL
-            output_file = f'../{channel_name}.m3u8'  # Define output file name
-            grab(line, output_file)
+            channel_name = line.split('/')[-1].split('.')[0]  # Extracting channel name from URL
+            output_file = f'{channel_name}.m3u8'  # Generating output file name
+            grab(line, output_file)  # Passing output file name to grab() function

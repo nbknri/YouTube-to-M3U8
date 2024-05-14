@@ -1,6 +1,5 @@
 #! /usr/bin/python3
 
-
 import requests
 import os
 import sys
@@ -15,13 +14,13 @@ def grab(url):
         response = requests.get(url).text
         if '.m3u8' not in response:
             if windows:
-                print('https://raw.githubusercontent.com/nbknri/YouTube_to_M3U8/main/assets/info.m3u8')
+                print('https://raw.githubusercontent.com/user-name/repo-name/main/assets/info.m3u8')
                 return
             #os.system(f'wget {url} -O temp.txt')
             os.system(f'curl "{url}" > temp.txt')
             response = ''.join(open('temp.txt').readlines())
             if '.m3u8' not in response:
-                print('https://raw.githubusercontent.com/nbknri/YouTube_to_M3U8/main/assets/info.m3u8')
+                print('https://raw.githubusercontent.com/user-name/repo-name/main/assets/info.m3u8')
                 return
     end = response.find('.m3u8') + 5
     tuner = 100
@@ -43,20 +42,10 @@ print('#EXTM3U')
 print('#EXT-X-VERSION:3')
 print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
 s = requests.Session()
-with open('../24News.txt') as f:
+with open('../channel-name.txt') as f:
     for line in f:
         line = line.strip()
         if not line or line.startswith('~~'):
             continue
-        if not line.startswith('https:'):
-            line = line.split('|')
-            ch_name = line[0].strip()
-            grp_title = line[1].strip().title()
-            tvg_logo = line[2].strip()
-            tvg_id = line[3].strip()
-        else:
+        if line.startswith('https:'):
             grab(line)
-
-if 'temp.txt' in os.listdir():
-    os.system('rm temp.txt')
-    os.system('rm watch*')

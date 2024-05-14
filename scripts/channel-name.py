@@ -44,7 +44,7 @@ def grab(url, channel_name):
 s = requests.Session()
 
 # Open channel-name.txt and parse each line
-with open('channel-name.txt') as f:
+with open('/home/runner/work/YouTube-to-M3U8/YouTube-to-M3U8/channel-name.txt') as f:
     lines = f.readlines()
     for line in lines[1:]:
         if line.strip() and not line.startswith('~~'):

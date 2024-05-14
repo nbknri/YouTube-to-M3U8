@@ -41,12 +41,16 @@ def grab(url, output_file):
         f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
         f.write(hd[st:].strip())
 
+if len(sys.argv) != 2:
+    print("Usage: python channel-name.py <custom_filename>")
+    sys.exit(1)
+
 s = requests.Session()
+custom_filename = sys.argv[1]
 with open('../channel-name.txt') as f:
     for i, line in enumerate(f):
         line = line.strip()
         if not line or line.startswith('~~'):
             continue
         if line.startswith('https:'):
-            url, custom_filename = line.split('|')[0].strip(), line.split('|')[1].strip()
-            grab(url, f'../{custom_filename}.m3u8')
+            grab(line, f'../{custom_filename}{i+1}.m3u8')

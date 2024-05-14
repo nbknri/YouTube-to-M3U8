@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: 24News
+name: channel-name
 
 # Controls when the action will run. 
 on:
@@ -41,8 +41,8 @@ jobs:
       - name: Main
         run: |
           pwd
-          chmod +x 24News.sh
-          ./24News.sh
+          chmod +x channel-name.sh
+          ./channel-name.sh
         
       - name: git add
         run: |
@@ -51,5 +51,5 @@ jobs:
           
       - name: commit & push
         run: |
-          git commit -m "Link updated"
+          git commit -m "Links updated"
           git push

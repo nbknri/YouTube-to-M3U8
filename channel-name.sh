@@ -1,5 +1,11 @@
 #!/bin/bash
 
+echo $(dirname $0)
+
 python3 -m pip install requests
 
-python3 scripts/channel-name.py
+cd $(dirname $0)/scripts/
+
+python3 channel-name.py
+
+echo m3u8 files generated

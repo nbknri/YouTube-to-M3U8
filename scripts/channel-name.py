@@ -41,12 +41,12 @@ def grab(url, output_file):
 
 s = requests.Session()
 with open('../channel-name.txt') as f:
-    for line in f:
+    lines = f.readlines()
+    for i, line in enumerate(lines):
         line = line.strip()
-        if not line or line.startswith('~~'):
-            continue
-        channel_info = line.split(' | ')
-        name = channel_info[0]
-        url = channel_info[-2]  # Adjusted index to get the URL
-        output_file = f'../{name.replace(" ", "")}.m3u8'
-        grab(url, output_file)
+        if '|' in line:
+            channel_info = line.split(' | ')
+            name = channel_info[0]
+            output_file = f'../{name.replace(" ", "")}.m3u8'
+            url = lines[i+1].strip()  # Get the URL from the next line
+            grab(url, output_file)

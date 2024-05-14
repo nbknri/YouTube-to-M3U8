@@ -8,7 +8,7 @@ windows = False
 if 'win' in sys.platform:
     windows = True
 
-def grab(url, channel_name, output_file):
+def grab(url, output_file):
     response = s.get(url, timeout=15).text
     if '.m3u8' not in response:
         response = requests.get(url).text
@@ -43,13 +43,12 @@ def grab(url, channel_name, output_file):
 
 s = requests.Session()
 with open('../channel-name.txt') as f:
-    channel_info = []
     for line in f:
         line = line.strip()
-        if line:
-            channel_info.append(line.split(' | '))
-
-for i, (name, group_name, logo, tvg_id) in enumerate(channel_info):
-    url = channel_info[i+1][0] if i < len(channel_info) - 1 else None
-    output_file = f'../{name.replace(" ", "")}.m3u8'
-    grab(url, name, output_file)
+        if not line or line.startswith('~~'):
+            continue
+        channel_info = line.split(' | ')
+        name = channel_info[0]
+        url = channel_info[-1]
+        output_file = f'../{name.replace(" ", "")}.m3u8'
+        grab(url, output_file)

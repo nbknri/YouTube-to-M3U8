@@ -1,5 +1,3 @@
-#! /usr/bin/python3
-
 import requests
 import os
 import sys
@@ -49,6 +47,6 @@ with open('../channel-name.txt') as f:
             continue
         channel_info = line.split(' | ')
         name = channel_info[0]
-        url = channel_info[-1]
+        url = channel_info[-2]  # Adjusted index to get the URL
         output_file = f'../{name.replace(" ", "")}.m3u8'
         grab(url, output_file)

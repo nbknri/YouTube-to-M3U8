@@ -8,7 +8,7 @@ windows = False
 if 'win' in sys.platform:
     windows = True
 
-def grab(url, output_file):
+def grab(url, channel_name):
     response = s.get(url, timeout=15).text
     if '.m3u8' not in response:
         response = requests.get(url).text
@@ -35,7 +35,7 @@ def grab(url, output_file):
     streams = s.get(link[start:end]).text.split('#EXT')
     hd = streams[-1].strip()
     st = hd.find('http')
-    with open(output_file, 'w') as f:
+    with open(f'../{channel_name}.m3u8', 'w') as f:
         f.write('#EXTM3U\n')
         f.write('#EXT-X-VERSION:3\n')
         f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
@@ -43,9 +43,12 @@ def grab(url, output_file):
 
 s = requests.Session()
 with open('../channel-name.txt') as f:
-    for i, line in enumerate(f):
-        line = line.strip()
-        if not line or line.startswith('~~'):
-            continue
-        if line.startswith('https:'):
-            grab(line, f'../channel-name{i+1}.m3u8')
+    lines = f.readlines()
+    for line in lines[2:]:
+        if line.strip() and not line.startswith('~~'):
+            parts = line.strip().split('|')
+            if len(parts) >= 4:
+                channel_name = parts[0].strip()
+                url = parts[4].strip()
+                if url.startswith('https:'):
+                    grab(url, channel_name)

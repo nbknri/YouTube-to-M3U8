@@ -8,7 +8,7 @@ windows = False
 if 'win' in sys.platform:
     windows = True
 
-def grab(url):
+def grab(url, output_file):
     response = s.get(url, timeout=15).text
     if '.m3u8' not in response:
         response = requests.get(url).text
@@ -16,6 +16,7 @@ def grab(url):
             if windows:
                 print('https://raw.githubusercontent.com/user-name/repo-name/main/assets/info.m3u8')
                 return
+            #os.system(f'wget {url} -O temp.txt')
             os.system(f'curl "{url}" > temp.txt')
             response = ''.join(open('temp.txt').readlines())
             if '.m3u8' not in response:
@@ -34,25 +35,17 @@ def grab(url):
     streams = s.get(link[start:end]).text.split('#EXT')
     hd = streams[-1].strip()
     st = hd.find('http')
-    return hd[st:].strip()
+    with open(output_file, 'w') as f:
+        f.write('#EXTM3U\n')
+        f.write('#EXT-X-VERSION:3\n')
+        f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
+        f.write(hd[st:].strip())
 
 s = requests.Session()
-
-# Iterate through each line in the channel-name.txt file
 with open('../channel-name.txt') as f:
-    for line in f:
+    for i, line in enumerate(f):
         line = line.strip()
-        if line.startswith('https://'):
+        if not line or line.startswith('~~'):
             continue
-        # Split the line into channel name, group name, logo, and tvg-id
-        line_parts = line.split('|')
-        ch_name = line_parts[0].strip()
-        # Adjust other parts as needed...
-        url = line_parts[-1].strip()
-        m3u8_content = grab(url)
-        with open(f'{ch_name}.m3u8', 'w') as m3u8_file:
-            m3u8_file.write(m3u8_content)
-
-if 'temp.txt' in os.listdir():
-    os.system('rm temp.txt')
-    os.system('rm watch*')
+        if line.startswith('https:'):
+            grab(line, f'../channel-name{i+1}.m3u8')

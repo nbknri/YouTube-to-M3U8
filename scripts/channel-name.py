@@ -1,5 +1,3 @@
-#! /usr/bin/python3
-
 import requests
 import os
 import sys
@@ -16,7 +14,6 @@ def grab(url, channel_name):
             if windows:
                 print('https://raw.githubusercontent.com/user-name/repo-name/main/assets/info.m3u8')
                 return
-            #os.system(f'wget {url} -O temp.txt')
             os.system(f'curl "{url}" > temp.txt')
             response = ''.join(open('temp.txt').readlines())
             if '.m3u8' not in response:
@@ -47,8 +44,8 @@ with open('../channel-name.txt') as f:
     for line in lines[2:]:
         if line.strip() and not line.startswith('~~'):
             parts = line.strip().split('|')
-            if len(parts) >= 2:  # Ensure there are at least two parts
+            if len(parts) >= 2:
                 channel_name = parts[0].strip()
-                url = parts[1].strip()  # Use the second part for URL
+                url = parts[1].strip()
                 if url.startswith('https:'):
                     grab(url, channel_name)

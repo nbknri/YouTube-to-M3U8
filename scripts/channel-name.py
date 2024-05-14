@@ -34,26 +34,24 @@ def grab(url):
     streams = s.get(link[start:end]).text.split('#EXT')
     hd = streams[-1].strip()
     st = hd.find('http')
-    print(hd[st:].strip())
+    return hd[st:].strip()
 
-print('#EXTM3U')
-print('#EXT-X-VERSION:3')
-print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
 s = requests.Session()
 
 # Iterate through each line in the channel-name.txt file
 with open('../channel-name.txt') as f:
     for line in f:
         line = line.strip()
-        if not line or line.startswith('~~') or line.startswith('https:'):
+        if line.startswith('https://'):
             continue
         # Split the line into channel name, group name, logo, and tvg-id
         line_parts = line.split('|')
         ch_name = line_parts[0].strip()
         # Adjust other parts as needed...
-        else:
-            # Generate the m3u8 file for the current channel
-            grab(line)
+        url = line_parts[-1].strip()
+        m3u8_content = grab(url)
+        with open(f'{ch_name}.m3u8', 'w') as m3u8_file:
+            m3u8_file.write(m3u8_content)
 
 if 'temp.txt' in os.listdir():
     os.system('rm temp.txt')

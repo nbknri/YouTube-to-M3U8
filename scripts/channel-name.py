@@ -43,9 +43,11 @@ print('#EXT-X-VERSION:3')
 print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
 s = requests.Session()
 with open('../channel-name.txt') as f:
-    for line in f:
+    for i, line in enumerate(f):
         line = line.strip()
         if not line or line.startswith('~~'):
             continue
         if line.startswith('https:'):
-            grab(line)
+            if i == 1:  # Only fetch the first link
+                grab(line)
+                break

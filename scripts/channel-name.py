@@ -1,14 +1,14 @@
+#! /usr/bin/python3
+
 import requests
 import os
 import sys
 
-# Check if running on Windows
 windows = False
 if 'win' in sys.platform:
     windows = True
 
-# Function to grab M3U8 file from YouTube channel URL
-def grab(url, channel_name):
+def grab(url):
     response = s.get(url, timeout=15).text
     if '.m3u8' not in response:
         response = requests.get(url).text
@@ -34,23 +34,9 @@ def grab(url, channel_name):
     streams = s.get(link[start:end]).text.split('#EXT')
     hd = streams[-1].strip()
     st = hd.find('http')
-    with open(f'../{channel_name}.m3u8', 'w') as f:
-        f.write('#EXTM3U\n')
-        f.write('#EXT-X-VERSION:3\n')
-        f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
-        f.write(hd[st:].strip())
+    print(hd[st:].strip())
 
-# Create a session
+print('#EXTM3U')
+print('#EXT-X-VERSION:3')
+print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
 s = requests.Session()
-
-# Open channel-name.txt and parse each line
-with open('/home/runner/work/YouTube-to-M3U8/YouTube-to-M3U8/channel-name.txt') as f:
-    lines = f.readlines()
-    for line in lines[1:]:
-        if line.strip() and not line.startswith('~~'):
-            parts = line.strip().split('|')
-            if len(parts) >= 2:
-                channel_name = parts[0].strip()
-                url = parts[-1].strip()
-                if url.startswith('https:'):
-                    grab(url, channel_name)

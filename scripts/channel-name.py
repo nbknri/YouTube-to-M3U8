@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+
 import requests
 import os
 import sys
@@ -37,7 +39,6 @@ def grab(url, channel_name, output_file):
         f.write('#EXTM3U\n')
         f.write('#EXT-X-VERSION:3\n')
         f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
-        f.write(f'#EXTINF:-1,{channel_name}\n')
         f.write(hd[st:].strip())
 
 s = requests.Session()
@@ -47,6 +48,6 @@ with open('../channel-name.txt') as f:
         if not line or line.startswith('~~'):
             continue
         if line.startswith('https:'):
-            parts = line.split('|')
-            channel_name = parts[0].strip()
+            url_parts = line.split(' | ')
+            channel_name = url_parts[0]
             grab(line, channel_name, f'../{channel_name}.m3u8')

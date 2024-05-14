@@ -35,7 +35,10 @@ def grab(url, channel_name):
     streams = s.get(link[start:end]).text.split('#EXT')
     hd = streams[-1].strip()
     st = hd.find('http')
-    with open(f'../{channel_name}.m3u8', 'w') as f:
+    output_dir = '../m3u8_files'
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    with open(f'{output_dir}/{channel_name}.m3u8', 'w') as f:
         f.write('#EXTM3U\n')
         f.write('#EXT-X-VERSION:3\n')
         f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')

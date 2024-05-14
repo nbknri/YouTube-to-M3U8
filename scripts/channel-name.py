@@ -8,7 +8,7 @@ windows = False
 if 'win' in sys.platform:
     windows = True
 
-def grab(url):
+def grab(url, output_file):
     response = s.get(url, timeout=15).text
     if '.m3u8' not in response:
         response = requests.get(url).text
@@ -35,12 +35,12 @@ def grab(url):
     streams = s.get(link[start:end]).text.split('#EXT')
     hd = streams[-1].strip()
     st = hd.find('http')
-    print(hd[st:].strip())
-    #print(f"{link[start : end]}")
+    with open(output_file, 'w') as f:
+        f.write('#EXTM3U\n')
+        f.write('#EXT-X-VERSION:3\n')
+        f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
+        f.write(hd[st:].strip())
 
-print('#EXTM3U')
-print('#EXT-X-VERSION:3')
-print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
 s = requests.Session()
 with open('../channel-name.txt') as f:
     for i, line in enumerate(f):
@@ -48,6 +48,4 @@ with open('../channel-name.txt') as f:
         if not line or line.startswith('~~'):
             continue
         if line.startswith('https:'):
-            if i == 1:  # Only fetch the first link
-                grab(line)
-                break
+            grab(line, f'../channel-name{i+1}.m3u8')

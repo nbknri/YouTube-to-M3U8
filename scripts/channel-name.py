@@ -1,5 +1,3 @@
-#! /usr/bin/python3
-
 import requests
 import os
 import sys
@@ -48,4 +46,6 @@ with open('../channel-name.txt') as f:
         if not line or line.startswith('~~'):
             continue
         if line.startswith('https:'):
-            grab(line, f'../channel-name{i+1}.m3u8')
+            channel_name = line.split('/')[-1].split('.')[0]  # Extract channel name from URL
+            output_file = f'../{channel_name}.m3u8'  # Define output file name
+            grab(line, output_file)

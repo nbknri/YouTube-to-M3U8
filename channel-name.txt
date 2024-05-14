@@ -1,6 +1,8 @@
-~~ DO NOT EDIT THE FIRST 2 LINES	
-~~ FORMAT: <channel name> | <group name> | <logo> | <tvg-id>
+channel-name1 | group-name1 | logo1 | tvg-id1
+https://www.youtube.com/channel/link1
 
+channel-name2 | group-name2 | logo2 | tvg-id2
+https://www.youtube.com/channel/link2
 
-24 News | | | |
-https://www.youtube.com/channel/UCup3etEdjyF1L3sRbU-rKLw/live
+channel-name3 | group-name3 | logo3 | tvg-id3
+https://www.youtube.com/channel/link3

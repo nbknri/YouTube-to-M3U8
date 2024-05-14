@@ -1,8 +1,8 @@
-channel-name1 | group-name1 | logo1 | tvg-id1
+24 News | group-name1 | logo1 | tvg-id1
 https://www.youtube.com/channel/UCup3etEdjyF1L3sRbU-rKLw/live
 
-channel-name2 | group-name2 | logo2 | tvg-id2
+Kairali TV | group-name2 | logo2 | tvg-id2
 https://www.youtube.com/c/@kairalinews/live
 
-channel-name3 | group-name3 | logo3 | tvg-id3
+Reporter TV | group-name3 | logo3 | tvg-id3
 https://www.youtube.com/channel/UCFx1nseXKTc1Culiu3neeSQ/live

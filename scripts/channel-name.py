@@ -60,6 +60,8 @@ if not os.path.exists(output_folder):
 
 # Create master m3u8 playlist
 master_playlist = os.path.join(output_folder, '../playlist.m3u')
+
+# Truncate the file to rewrite it every time
 with open(master_playlist, 'w') as master:
     master.write('#EXTM3U\n')
 

@@ -2,10 +2,7 @@ import requests
 import os
 import sys
 
-windows = False
-if 'win' in sys.platform:
-    windows = True
-
+# Function to fetch M3U8 links and create M3U8 files
 def grab(url, channel_name, group_name, logo, output_folder):
     response = s.get(url, timeout=15).text
     if '.m3u8' not in response:
@@ -63,6 +60,30 @@ master_playlist = os.path.join(output_folder, '../playlist.m3u')
 with open(master_playlist, 'w') as master:
     master.write('#EXTM3U\n')
 
+# Detect if running on Windows
+windows = False
+if 'win' in sys.platform:
+    windows = True
+
+# Get the list of channel names from channel-name.txt
+available_channel_names = []
+with open('../channel-name.txt') as f:
+    lines = f.readlines()
+    for i, line in enumerate(lines):
+        line = line.strip()
+        if '|' in line:
+            channel_info = line.split(' | ')
+            name = channel_info[0]
+            available_channel_names.append(name)
+
+# Process each channel
+existing_m3u8_files = [file for file in os.listdir(output_folder) if file.endswith('.m3u8')]
+for m3u8_file in existing_m3u8_files:
+    channel_name = os.path.splitext(m3u8_file)[0]
+    if channel_name not in available_channel_names:
+        os.remove(os.path.join(output_folder, m3u8_file))
+        
+# Process each channel in channel-name.txt
 with open('../channel-name.txt') as f:
     lines = f.readlines()
     for i, line in enumerate(lines):

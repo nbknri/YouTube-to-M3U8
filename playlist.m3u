@@ -1,8 +1,8 @@
 #EXTM3U
 #EXTINF:-1 group-title="YtbGithub - Malayalam", tvg-logo="https://www.twentyfournews.com/wp-content/themes/nextline_v3/images/logo-new.png", 24 News
 https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/channel/24News.m3u8
-#EXTINF:-1 group-title="YtbGithub - Malayalam", tvg-logo="https://www.twentyfournews.com/wp-content/themes/nextline_v3/images/logo-new.png", 24 News HDD
-https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/channel/24NewsHDD.m3u8
+#EXTINF:-1 group-title="YtbGithub - Malayalam", tvg-logo="https://www.twentyfournews.com/wp-content/themes/nextline_v3/images/logo-new.png", 24 News H
+https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/channel/24NewsH.m3u8
 #EXTINF:-1 group-title="YtbGithub - Malayalam", tvg-logo="https://static.wikia.nocookie.net/logopedia/images/d/d4/Kairali_News.jpeg/revision/latest/scale-to-width-down/300?cb=20191221124115", Kairali News
 https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/channel/KairaliNews.m3u8
 #EXTINF:-1 group-title="YtbGithub - Malayalam", tvg-logo="https://upload.wikimedia.org/wikipedia/commons/c/c4/Asianet_News_Logo.png", Asianet News

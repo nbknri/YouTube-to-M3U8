@@ -20,7 +20,6 @@ def grab(url, channel_name, output_folder):
                     f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
                     f.write('https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/assets/info.m3u8')
                 return
-            #os.system(f'wget {url} -O temp.txt')
             os.system(f'curl "{url}" > temp.txt')
             response = ''.join(open('temp.txt').readlines())
             if '.m3u8' not in response:
@@ -59,6 +58,11 @@ output_folder = '../channel'
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
+# Create m3u8 playlist
+master_playlist = os.path.join(output_folder, '../playlist.m3u8')
+with open(master_playlist, 'w') as master:
+    master.write('#EXTM3U\n')
+
 with open('../channel-name.txt') as f:
     lines = f.readlines()
     for i, line in enumerate(lines):
@@ -66,5 +70,12 @@ with open('../channel-name.txt') as f:
         if '|' in line:
             channel_info = line.split(' | ')
             name = channel_info[0]
+            group_name = channel_info[1]
+            logo = channel_info[2]
             url = lines[i+1].strip()  # Get the URL from the next line
             grab(url, name, output_folder)
+            # Append channel info to master playlist
+            m3u8_file = f'./channel/{name.replace(" ", "")}.m3u8'
+            with open(master_playlist, 'a') as master:
+                master.write(f'#EXTINF:-1 group-title="{group_name}" tvg-logo="{logo}", {name}\n')
+                master.write(f'{m3u8_file}\n')

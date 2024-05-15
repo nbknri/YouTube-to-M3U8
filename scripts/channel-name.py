@@ -1,6 +1,7 @@
 import requests
 import os
 import sys
+import shutil
 
 windows = False
 if 'win' in sys.platform:
@@ -58,15 +59,6 @@ output_folder = '../channel'
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
-# Delete existing playlist.m3u file if it exists
-master_playlist = os.path.join(output_folder, '../playlist.m3u')
-if os.path.exists(master_playlist):
-    os.remove(master_playlist)
-
-# Create master m3u8 playlist
-with open(master_playlist, 'w') as master:
-    master.write('#EXTM3U\n')
-
 with open('../channel-name.txt') as f:
     lines = f.readlines()
     for i, line in enumerate(lines):
@@ -77,9 +69,23 @@ with open('../channel-name.txt') as f:
             group_name = channel_info[1]
             logo = channel_info[2]
             url = lines[i+1].strip()  # Get the URL from the next line
+            
+            # Create master m3u8 playlist
+            master_playlist = os.path.join(output_folder, '../playlist.m3u')
+            backup_playlist = os.path.join(output_folder, '../playlist_backup.m3u')
+            if os.path.exists(master_playlist):
+                shutil.copy(master_playlist, backup_playlist)
+                os.remove(master_playlist)
+            with open(master_playlist, 'w') as master:
+                master.write('#EXTM3U\n')
+                
             grab(url, name, group_name, logo, output_folder)
             # Append channel info to master playlist
             m3u8_file = f'https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/channel/{name.replace(" ", "")}.m3u8'
             with open(master_playlist, 'a') as master:
                 master.write(f'#EXTINF:-1 group-title="{group_name}", tvg-logo="{logo}", {name}\n')
                 master.write(f'{m3u8_file}\n')
+
+# Remove the backup playlist file after regeneration
+if os.path.exists(backup_playlist):
+    os.remove(backup_playlist)

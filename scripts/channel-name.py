@@ -58,22 +58,8 @@ output_folder = '../channel'
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
-# Iterate through existing .m3u8 files and regenerate them
-for file_name in os.listdir(output_folder):
-    if file_name.endswith(".m3u8"):
-        file_path = os.path.join(output_folder, file_name)
-        with open(file_path, 'r') as f:
-            lines = f.readlines()
-            if not lines or not lines[0].startswith('#EXTM3U'):
-                continue  # Not a valid M3U8 file, skip
-            url = lines[-1].strip()  # Get the URL from the last line
-            channel_name = os.path.splitext(file_name)[0]
-            grab(url, channel_name, '', '', output_folder)
-
-# Create master m3u8 playlist
+# Create m3u8 playlist
 master_playlist = os.path.join(output_folder, '../playlist.m3u')
-
-# Truncate the file to rewrite it every time
 with open(master_playlist, 'w') as master:
     master.write('#EXTM3U\n')
 

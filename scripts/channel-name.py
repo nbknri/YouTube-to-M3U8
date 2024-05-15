@@ -58,8 +58,8 @@ output_folder = '../channel'
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
-# Create m3u8 playlist
-master_playlist = os.path.join(output_folder, '../playlist.m3u8')
+# Create m3u8 master playlist
+master_playlist = '../playlist.m3u8'
 with open(master_playlist, 'w') as master:
     master.write('#EXTM3U\n')
 

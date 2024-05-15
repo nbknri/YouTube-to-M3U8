@@ -12,26 +12,8 @@ def grab(url, channel_name, group_name, logo, output_folder):
     if '.m3u8' not in response:
         response = requests.get(url).text
         if '.m3u8' not in response:
-            if windows:
-                link = 'https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/assets/info.m3u8'
-                output_file = os.path.join(output_folder, f'{channel_name.replace(" ", "")}.m3u8')
-                with open(output_file, 'w') as f:
-                    f.write('#EXTM3U\n')
-                    f.write('#EXT-X-VERSION:3\n')
-                    f.write(f'#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
-                    f.write(link)
-                return
-            os.system(f'curl "{url}" > temp.txt')
-            response = ''.join(open('temp.txt').readlines())
-            if '.m3u8' not in response:
-                link = 'https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/assets/info.m3u8'
-                output_file = os.path.join(output_folder, f'{channel_name.replace(" ", "")}.m3u8')
-                with open(output_file, 'w') as f:
-                    f.write('#EXTM3U\n')
-                    f.write('#EXT-X-VERSION:3\n')
-                    f.write(f'#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
-                    f.write(link)
-                return
+            recreate_playlist(output_folder)
+            return
     end = response.find('.m3u8') + 5
     tuner = 100
     while True:
@@ -52,6 +34,15 @@ def grab(url, channel_name, group_name, logo, output_folder):
         f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
         f.write(hd[st:].strip())
 
+def recreate_playlist(output_folder):
+    master_playlist = os.path.join(output_folder, '../playlist.m3u')
+    backup_playlist = os.path.join(output_folder, '../playlist_backup.m3u')
+    if os.path.exists(master_playlist):
+        shutil.copy(master_playlist, backup_playlist)
+        os.remove(master_playlist)
+    with open(master_playlist, 'w') as master:
+        master.write('#EXTM3U\n')
+
 s = requests.Session()
 
 # Create the "channel" folder if it doesn't exist
@@ -70,15 +61,6 @@ with open('../channel-name.txt') as f:
             logo = channel_info[2]
             url = lines[i+1].strip()  # Get the URL from the next line
             
-            # Create master m3u8 playlist
-            master_playlist = os.path.join(output_folder, '../playlist.m3u')
-            backup_playlist = os.path.join(output_folder, '../playlist_backup.m3u')
-            if os.path.exists(master_playlist):
-                shutil.copy(master_playlist, backup_playlist)
-                os.remove(master_playlist)
-            with open(master_playlist, 'w') as master:
-                master.write('#EXTM3U\n')
-                
             grab(url, name, group_name, logo, output_folder)
             # Append channel info to master playlist
             m3u8_file = f'https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/channel/{name.replace(" ", "")}.m3u8'

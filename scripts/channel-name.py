@@ -6,7 +6,7 @@ windows = False
 if 'win' in sys.platform:
     windows = True
 
-def grab(url, channel_name, output_folder):
+def grab(url, channel_name, group_name, logo, output_folder):
     response = s.get(url, timeout=15).text
     if '.m3u8' not in response:
         response = requests.get(url).text
@@ -58,8 +58,8 @@ output_folder = '../channel'
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
-# Create m3u8 master playlist
-master_playlist = '../playlist.m3u8'
+# Create m3u8 playlist
+master_playlist = os.path.join(output_folder, '../playlist.m3u')
 with open(master_playlist, 'w') as master:
     master.write('#EXTM3U\n')
 
@@ -73,9 +73,9 @@ with open('../channel-name.txt') as f:
             group_name = channel_info[1]
             logo = channel_info[2]
             url = lines[i+1].strip()  # Get the URL from the next line
-            grab(url, name, output_folder)
+            grab(url, name, group_name, logo, output_folder)
             # Append channel info to master playlist
             m3u8_file = f'https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/channel/{name.replace(" ", "")}.m3u8'
             with open(master_playlist, 'a') as master:
-                master.write(f'#EXTINF:-1 group-title="{group_name}" tvg-logo="{logo}", {name}\n')
+                master.write(f'#EXTINF:-1 group-title="{group_name}", tvg-logo="{logo}", {name}\n')
                 master.write(f'{m3u8_file}\n')

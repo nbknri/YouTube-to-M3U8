@@ -57,7 +57,7 @@ if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
 # Create master m3u8 playlist
-master_playlist = os.path.join(output_folder, '../master_playlist.m3u8')
+master_playlist = os.path.join(output_folder, '../master_playlist.m3u')
 with open(master_playlist, 'w') as master:
     master.write('#EXTM3U\n')
 
@@ -75,6 +75,5 @@ with open('../channel-name.txt') as f:
             # Append channel info to master playlist
             m3u8_file = f'https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/channel/{name.replace(" ", "")}.m3u8'
             with open(master_playlist, 'a') as master:
-                master.write(f'#EXTINF:-1 group-title="{group_name}", {name}\n')
-                master.write(f'#EXTIMG:{logo}\n')
+                master.write(f'#EXTINF:-1 group-title="{group_name}" tvg-logo="{logo}", {name}\n')
                 master.write(f'{m3u8_file}\n')

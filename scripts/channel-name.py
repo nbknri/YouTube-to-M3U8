@@ -15,9 +15,6 @@ def grab(url, channel_name, output_folder):
                 print('https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/assets/info.m3u8')
                 output_file = os.path.join(output_folder, f'{channel_name.replace(" ", "")}.m3u8')
                 with open(output_file, 'w') as f:
-                    f.write('#EXTM3U\n')
-                    f.write('#EXT-X-VERSION:3\n')
-                    f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
                     f.write('https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/assets/info.m3u8')
                 return
             #os.system(f'wget {url} -O temp.txt')
@@ -27,9 +24,6 @@ def grab(url, channel_name, output_folder):
                 print('https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/assets/info.m3u8')
                 output_file = os.path.join(output_folder, f'{channel_name.replace(" ", "")}.m3u8')
                 with open(output_file, 'w') as f:
-                    f.write('#EXTM3U\n')
-                    f.write('#EXT-X-VERSION:3\n')
-                    f.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
                     f.write('https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/assets/info.m3u8')
                 return
     end = response.find('.m3u8') + 5

@@ -1,8 +1,56 @@
-24 News | group-name1 | logo1 | tvg-id1
+~~ DO NOT EDIT THE FIRST 2 LINES
+~~ FORMAT: <channel name> | <group name> | <logo> | <tvg-id>
+
+24 News Malayalam | YtbGithub - Malayalam | https://www.twentyfournews.com/wp-content/themes/nextline_v3/images/logo-new.png |
 https://www.youtube.com/channel/UCup3etEdjyF1L3sRbU-rKLw/live
 
-Kairali TV | group-name2 | logo2 | tvg-id2
+Kairali News | YtbGithub - Malayalam | https://static.wikia.nocookie.net/logopedia/images/d/d4/Kairali_News.jpeg/revision/latest/scale-to-width-down/300?cb=20191221124115 |
 https://www.youtube.com/c/@kairalinews/live
 
-Reporter TV | group-name3 | logo3 | tvg-id3
+Asianet News | YtbGithub - Malayalam | https://upload.wikimedia.org/wikipedia/commons/c/c4/Asianet_News_Logo.png |
+https://www.youtube.com/user/asianetnews/live
+
+Reporter | YtbGithub - Malayalam | https://yt3.ggpht.com/ytc/AAUvwngYsY0-vY4E8BQ1SvfkhzJKhSQGazUVCU6Li8saGw=s900-c-k-c0x00ffffff-no-rj |
 https://www.youtube.com/channel/UCFx1nseXKTc1Culiu3neeSQ/live
+
+Mathrubhumi News | YtbGithub - Malayalam | https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Mathrubhumi_news.svg/1200px-Mathrubhumi_news.svg.png |
+https://www.youtube.com/user/TVMathrubhumi/live
+
+Media One News | YtbGithub - Malayalam | https://upload.wikimedia.org/wikipedia/commons/6/62/Media_One_Logo.png |
+https://www.youtube.com/user/MediaoneTVLive/live
+
+Manorama News | YtbGithub - Malayalam | https://play-lh.googleusercontent.com/k0A88RrzsPqX1D75am5_bOJ3M2Y0R0fXi7gu4BfgmS2GkuUNvFnSLMmCaLBK0BhQ9Es |
+https://www.youtube.com/channel/UCP0uG-mcMImgKnJz-VjJZmQ/live
+
+News 18 Kerala | YtbGithub - Malayalam | https://upload.wikimedia.org/wikipedia/commons/0/05/News18_Kerala.png |
+https://www.youtube.com/channel/UC-mMi78WJST4N5o8_i1FoXw/live
+
+Polimer News | YtbGithub - Tamil | http://akamaividz.zee5.com/resources/0-9-203/list/386x386/09203polimernews.png | 636
+https://www.youtube.com/channel/UC8Z-VjXBtDJTvq6aqkIskPg/live
+
+News7 Tamil | YtbGithub - Tamil | http://image.airtel.tv/content/MWTV/LIVETVCHANNEL/MWTV_LIVETVCHANNEL_797/img_logo_news_7_tamil-2.png | 673
+https://www.youtube.com/channel/UC2f4w_ppqHplvjiNaoTAK9w/live
+
+Thanthi TV | YtbGithub - Tamil | http://www.thanthitv.com/Images/TTV-800x800.png | 830
+https://www.youtube.com/c/ThanthitvNews/live
+
+New18 TamilNadu | YtbGithub - Tamil | http://7starcloud.in/NB.png | ts58
+https://www.youtube.com/channel/UCat88i6_rELqI_prwvjspRA/live
+
+Puthiya Thalaimurai | YtbGithub - Tamil | http://image.airtel.tv/MWTV/MWTV_LIVETVCHANNEL_793/LOGO/5Jz56JGv.png | 677
+https://www.youtube.com/c/PuthiyaThalaimuraiTV/live
+
+Talking Tom | YtbGithub - Kids | https://w7.pngwing.com/pngs/235/477/png-transparent-my-talking-tom-talking-angela-talking-tom-camp-love-letter-talking-tom-love-game-face-thumbnail.png | 
+https://www.youtube.com/user/TalkingTomCat/live
+
+Arivin Nilavu | YtbGithub - Religion | | 
+https://www.youtube.com/channel/UC37Lvilu-13Xiv_UyCjIwpg/live
+
+Kerala Vision News 24 X 7 | YtbGithub - Malayalam | https://yt3.googleusercontent.com/_dbdglDqlSDiyTlJVB7IKBucllS5G-copbHfBQHXNfyPx3mgHzvf-cGnikfbSnl8LstCPNw7xQ=s100-c-k-c0x00ffffff-no-rj |
+https://www.youtube.com/@keralavisionnews24x7/live
+
+Kerala Kaumudi | YtbGithub - Malayalam | https://yt3.ggpht.com/yUDAHGjE3PXQK_m9iyYKk0b1tK6Lj9_cnGEy9rf1dGcF_rROC7AebqEekILYacnGRfCzwS8f=s100-c-k-c0x00ffffff-no-rj |
+https://www.youtube.com/@kaumudylive/live
+
+C media Live | YtbGithub - Malayalam | https://yt3.ggpht.com/ytc/AMLnZu_fPw731MLeTePVvSfxgs1xRS0JfpyZWyXrZXA=s100-c-k-c0x00ffffff-no-rj |
+https://www.youtube.com/@cmedialive9904/live

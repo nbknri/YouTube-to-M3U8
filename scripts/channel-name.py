@@ -54,7 +54,7 @@ def grab(url, channel_name, group_name, logo, output_folder):
 s = requests.Session()
 
 # Create the "channel" folder if it doesn't exist
-output_folder = '../channel'
+output_folder = 'channel'
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 

@@ -6,19 +6,25 @@ windows = False
 if 'win' in sys.platform:
     windows = True
 
-def grab(url, output_file):
+def grab(url, channel_name, output_folder):
     response = s.get(url, timeout=15).text
     if '.m3u8' not in response:
         response = requests.get(url).text
         if '.m3u8' not in response:
             if windows:
                 print('https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/assets/info.m3u8')
+                output_file = os.path.join(output_folder, f'{channel_name.replace(" ", "")}.m3u8')
+                with open(output_file, 'w') as f:
+                    f.write('https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/assets/info.m3u8')
                 return
             #os.system(f'wget {url} -O temp.txt')
             os.system(f'curl "{url}" > temp.txt')
             response = ''.join(open('temp.txt').readlines())
             if '.m3u8' not in response:
                 print('https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/assets/info.m3u8')
+                output_file = os.path.join(output_folder, f'{channel_name.replace(" ", "")}.m3u8')
+                with open(output_file, 'w') as f:
+                    f.write('https://raw.githubusercontent.com/nbknri/YouTube-to-M3U8/main/assets/info.m3u8')
                 return
     end = response.find('.m3u8') + 5
     tuner = 100
@@ -33,6 +39,7 @@ def grab(url, output_file):
     streams = s.get(link[start:end]).text.split('#EXT')
     hd = streams[-1].strip()
     st = hd.find('http')
+    output_file = os.path.join(output_folder, f'{channel_name.replace(" ", "")}.m3u8')
     with open(output_file, 'w') as f:
         f.write('#EXTM3U\n')
         f.write('#EXT-X-VERSION:3\n')
@@ -42,8 +49,9 @@ def grab(url, output_file):
 s = requests.Session()
 
 # Create the "channel" folder if it doesn't exist
-if not os.path.exists('../channel'):
-    os.makedirs('../channel')
+output_folder = 'channel'
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
 
 with open('../channel-name.txt') as f:
     lines = f.readlines()
@@ -52,6 +60,5 @@ with open('../channel-name.txt') as f:
         if '|' in line:
             channel_info = line.split(' | ')
             name = channel_info[0]
-            output_file = f'../channel/{name.replace(" ", "")}.m3u8'
             url = lines[i+1].strip()  # Get the URL from the next line
-            grab(url, output_file)
+            grab(url, name, output_folder)
